@@ -1,6 +1,6 @@
 /**
  * Easy to use Wizard library for AngularJS
- * @version v0.4.0 - 2014-07-10 * @link https://github.com/mgonto/angular-wizard
+ * @version v0.4.0 - 2014-11-10 * @link https://github.com/mgonto/angular-wizard
  * @author Martin Gontovnikas <martin@gon.to>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -14,7 +14,7 @@ angular.module("step.html", []).run(["$templateCache", function($templateCache) 
 
 angular.module("wizard.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("wizard.html",
-    "<div>\n" +
+    "<div class=\"wizard-container\">\n" +
     "    <div class=\"steps\" ng-transclude></div>\n" +
     "    <ul class=\"steps-indicator steps-{{steps.length}}\" ng-if=\"!hideIndicators\">\n" +
     "      <li ng-class=\"{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}\" ng-repeat=\"step in steps\">\n" +
@@ -44,7 +44,7 @@ angular.module('mgo-angular-wizard').directive('wzStep', function() {
             $scope.title = $scope.title || $scope.wzTitle;
             wizard.addStep($scope);
         }
-    };
+    }
 });
 
 angular.module('mgo-angular-wizard').directive('wizard', function() {
@@ -105,12 +105,7 @@ angular.module('mgo-angular-wizard').directive('wizard', function() {
                     $scope.currentStep = step.title || step.wzTitle;
                 }
                 step.selected = true;
-                $scope.$emit('wizard:stepChanged', {step: step, index: _.indexOf($scope.steps , step)});
             };
-            
-            $scope.currentStepNumber = function() {
-                return _.indexOf($scope.steps , $scope.selectedStep) + 1;
-            }
 
             function unselectAll() {
                 _.each($scope.steps, function (step) {
@@ -171,7 +166,8 @@ function wizardButtonDirective(action) {
                     $element.on("click", function(e) {
                         e.preventDefault();
                         $scope.$apply(function() {
-                            $scope.$eval($attrs[action]);
+                            var val = $scope.$eval($attrs[action]);
+                            if (val === false) { return; }
                             wizard[action.replace("wz", "").toLowerCase()]();
                         });
                     });
