@@ -1,6 +1,6 @@
 /**
  * Easy to use Wizard library for AngularJS
- * @version v0.4.0 - 2014-11-10 * @link https://github.com/mgonto/angular-wizard
+ * @version v0.4.0 - 2014-11-18 * @link https://github.com/mgonto/angular-wizard
  * @author Martin Gontovnikas <martin@gon.to>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -44,7 +44,7 @@ angular.module('mgo-angular-wizard').directive('wzStep', function() {
             $scope.title = $scope.title || $scope.wzTitle;
             wizard.addStep($scope);
         }
-    }
+    };
 });
 
 angular.module('mgo-angular-wizard').directive('wizard', function() {
@@ -105,7 +105,12 @@ angular.module('mgo-angular-wizard').directive('wizard', function() {
                     $scope.currentStep = step.title || step.wzTitle;
                 }
                 step.selected = true;
+                $scope.$emit('wizard:stepChanged', {step: step, index: _.indexOf($scope.steps , step)});
             };
+            
+            $scope.currentStepNumber = function() {
+                return _.indexOf($scope.steps , $scope.selectedStep) + 1;
+            }
 
             function unselectAll() {
                 _.each($scope.steps, function (step) {
