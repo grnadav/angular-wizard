@@ -2,6 +2,7 @@
   position: relative;
   padding-top: 50px;
   padding-right: 30px;
+  padding-bottom: 50px;
   padding-left: 30px;
 }
 
@@ -9,10 +10,6 @@
   position: absolute;
   bottom: 15px;
   width: 100%;
-}
-
-.wizard-container.height-50 {
-  height: 640px;
 }
 
 .wizard-container .steps-indicator {
