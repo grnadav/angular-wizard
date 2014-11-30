@@ -1,6 +1,6 @@
 /**
  * Easy to use Wizard library for AngularJS
- * @version v0.4.0 - 2014-11-23 * @link https://github.com/mgonto/angular-wizard
+ * @version v0.4.0 - 2014-11-30 * @link https://github.com/mgonto/angular-wizard
  * @author Martin Gontovnikas <martin@gon.to>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -16,7 +16,7 @@ angular.module("wizard.html", []).run(["$templateCache", function($templateCache
   $templateCache.put("wizard.html",
     "<div class=\"wizard-container\">\n" +
     "    <div class=\"steps\" ng-transclude></div>\n" +
-    "    <ul class=\"steps-indicator steps-{{steps.length}}\" ng-if=\"!hideIndicators\">\n" +
+    "    <ul class=\"steps-indicator steps-{{steps.length}}\" ng-if=\"!hideIndicators\" ng-class='{\"hide-indocators\": hideIndicators}' >\n" +
     "      <li ng-class=\"{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}\" ng-repeat=\"step in steps\">\n" +
     "        <a ng-click=\"goTo(step)\">{{step.title || step.wzTitle}}</a>\n" +
     "      </li>\n" +

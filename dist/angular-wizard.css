@@ -6,6 +6,10 @@
   padding-left: 30px;
 }
 
+.wizard-container.hide-indicators {
+  padding-top: 0px;
+}
+
 .wizard-container .wizard-buttons-row {
   position: absolute;
   bottom: 15px;
